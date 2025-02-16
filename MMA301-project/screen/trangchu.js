@@ -148,6 +148,9 @@ function Trangchu() {
                 <TouchableOpacity style={styles.btn}>
                     <Text style={styles.btntext}>Xem Tất cả</Text>
                 </TouchableOpacity>
+                <TouchableOpacity style={styles.btn}>
+                    <Text style={styles.btntext}>minh test</Text>
+                </TouchableOpacity>
             </View>
             <Footer></Footer>
         </ScrollView>
