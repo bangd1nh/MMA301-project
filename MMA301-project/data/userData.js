@@ -56,9 +56,14 @@ export const register = async (name, email, password, phone, address) => {
 
 export const login = async (email, password) => {
   try {
+    // Lấy dữ liệu người dùng từ AsyncStorage
     const existingUsers = await AsyncStorage.getItem('users');
     const users = existingUsers ? JSON.parse(existingUsers) : [];
 
+    // In ra danh sách người dùng trong AsyncStorage để kiểm tra
+    console.log("Users from AsyncStorage:", users);
+
+    // Tìm người dùng theo email và mật khẩu
     const user = users.find(user => user.email === email && user.password === password);
     if (user) {
       return { success: true, user };

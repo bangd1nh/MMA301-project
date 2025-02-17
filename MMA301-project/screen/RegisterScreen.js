@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { View, Text, TextInput, TouchableOpacity, StyleSheet, Alert } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { register } from '../data/userData';
+import { useNavigation } from "@react-navigation/native";
 
 function RegisterScreen() {
   const [name, setName] = useState('');
@@ -10,6 +11,7 @@ function RegisterScreen() {
   const [confirmPassword, setConfirmPassword] = useState('');
   const [phone, setPhone] = useState('');
   const [address, setAddress] = useState('');
+  const navigation = useNavigation();
 
   const isValidEmail = (email) => /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/.test(email);
   const isValidPhone = (phone) => /^[0-9]{10}$/.test(phone);
@@ -70,7 +72,7 @@ function RegisterScreen() {
         <Text style={styles.buttonText}>Sign Up</Text>
       </TouchableOpacity>
 
-      <Text style={styles.footerText}>Already have an account? <Text style={styles.link}>Log in</Text></Text>
+      <Text style={styles.footerText}>Already have an account? <Text style={styles.link} onPress={() => navigation.navigate("LoginScreen")}>Log in</Text></Text>
     </View>
   );
 }

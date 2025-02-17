@@ -16,7 +16,7 @@ import {
     MaterialCommunityIcons,
   } from "@expo/vector-icons";
   import React, { useState } from "react";
-  import { login } from "../data/userData"; // Import hàm login từ users.js
+  import { login } from "../data/userData"; 
   import { useNavigation } from "@react-navigation/native";
 
   function LoginScreen() {
@@ -26,14 +26,16 @@ import {
     const [checked, setChecked] = useState(false);
     const navigation = useNavigation();
   
-    const handleLogin = () => {
-      const result = login(email, password);
+    const handleLogin = async () => {
+      const result = await login(email, password);  // Chờ kết quả trả về từ hàm login
       if (result.success) {
         Alert.alert("Login Successful", `Welcome ${result.user.name}!`);
+        navigation.navigate("Trangchu");  // Chuyển hướng đến Trangchu nếu đăng nhập thành công
       } else {
-        Alert.alert("Login Failed", result.message);
+        Alert.alert("Login Failed", result.message);  // Hiển thị thông báo lỗi nếu đăng nhập thất bại
       }
     };
+    
   
     return (
       <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
