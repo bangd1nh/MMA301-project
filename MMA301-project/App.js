@@ -1,15 +1,20 @@
-import React from "react";
-import { StatusBar } from "react-native";
-import AppNavigator from "./navigation/AppNavigator";
-import { CartProvider } from "./context/CartContext";
+import { StatusBar } from 'expo-status-bar';
+import { StyleSheet, Text, View } from 'react-native';
 
-const App = () => {
+export default function App() {
   return (
-    <CartProvider>
-      <StatusBar barStyle="dark-content" />
-      <AppNavigator />
-    </CartProvider>
+    <View style={styles.container}>
+      <Text>Open up App.js to start working on your app!</Text>
+      <StatusBar style="auto" />
+    </View>
   );
-};
+}
 
-export default App;
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: '#fff',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+});
