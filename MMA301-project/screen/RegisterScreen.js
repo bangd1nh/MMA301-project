@@ -11,19 +11,9 @@ function RegisterScreen() {
   const [phone, setPhone] = useState('');
   const [address, setAddress] = useState('');
 
-  const isValidEmail = (email) => {
-    const regex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;
-    return regex.test(email);
-  };
-
-  const isValidPhone = (phone) => {
-    const regex = /^[0-9]{10}$/;
-    return regex.test(phone);
-  };
-
-  const isValidPassword = () => {
-    return password === confirmPassword;
-  };
+  const isValidEmail = (email) => /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/.test(email);
+  const isValidPhone = (phone) => /^[0-9]{10}$/.test(phone);
+  const isValidPassword = () => password === confirmPassword;
 
   const handleSignUp = async () => {
     if (!name || !email || !password || !confirmPassword || !phone || !address) {
@@ -47,90 +37,40 @@ function RegisterScreen() {
     }
 
     const result = await register(name, email, password, phone, address);
-    if (result.success) {
-      Alert.alert("Registration Successful", result.message);
-    } else {
-      Alert.alert("Registration Failed", result.message);
-    }
+    Alert.alert(result.success ? "Success" : "Error", result.message);
   };
 
   return (
     <View style={styles.container}>
-      <Text style={styles.header}>Sign Up</Text>
+      <Text style={styles.header}>Create Account</Text>
 
-      {/* Name Field */}
-      <View style={styles.inputContainer}>
-        <Ionicons name="person-outline" size={24} color="black" />
-        <TextInput
-          style={styles.input}
-          placeholder="Name"
-          value={name}
-          onChangeText={setName}
-        />
-      </View>
-
-      {/* Email Field */}
-      <View style={styles.inputContainer}>
-        <Ionicons name="mail-outline" size={24} color="black" />
-        <TextInput
-          style={styles.input}
-          placeholder="Email"
-          value={email}
-          onChangeText={setEmail}
-          keyboardType="email-address"
-        />
-      </View>
-
-      {/* Password Field */}
-      <View style={styles.inputContainer}>
-        <Ionicons name="lock-closed-outline" size={24} color="black" />
-        <TextInput
-          style={styles.input}
-          placeholder="Password"
-          secureTextEntry
-          value={password}
-          onChangeText={setPassword}
-        />
-      </View>
-
-      {/* Confirm Password Field */}
-      <View style={styles.inputContainer}>
-        <Ionicons name="lock-closed-outline" size={24} color="black" />
-        <TextInput
-          style={styles.input}
-          placeholder="Confirm Password"
-          secureTextEntry
-          value={confirmPassword}
-          onChangeText={setConfirmPassword}
-        />
-      </View>
-
-      {/* Phone Field */}
-      <View style={styles.inputContainer}>
-        <Ionicons name="call-outline" size={24} color="black" />
-        <TextInput
-          style={styles.input}
-          placeholder="Phone"
-          value={phone}
-          onChangeText={setPhone}
-          keyboardType="phone-pad"
-        />
-      </View>
-
-      {/* Address Field */}
-      <View style={styles.inputContainer}>
-        <Ionicons name="location-outline" size={24} color="black" />
-        <TextInput
-          style={styles.input}
-          placeholder="Address"
-          value={address}
-          onChangeText={setAddress}
-        />
-      </View>
+      {[
+        { placeholder: "Name", value: name, onChangeText: setName, icon: "person-outline" },
+        { placeholder: "Email", value: email, onChangeText: setEmail, icon: "mail-outline", keyboardType: "email-address" },
+        { placeholder: "Password", value: password, onChangeText: setPassword, icon: "lock-closed-outline", secureTextEntry: true },
+        { placeholder: "Confirm Password", value: confirmPassword, onChangeText: setConfirmPassword, icon: "lock-closed-outline", secureTextEntry: true },
+        { placeholder: "Phone", value: phone, onChangeText: setPhone, icon: "call-outline", keyboardType: "phone-pad" },
+        { placeholder: "Address", value: address, onChangeText: setAddress, icon: "location-outline" },
+      ].map((field, index) => (
+        <View key={index} style={styles.inputContainer}>
+          <Ionicons name={field.icon} size={24} color="#444" />
+          <TextInput
+            style={styles.input}
+            placeholder={field.placeholder}
+            placeholderTextColor="#888"
+            value={field.value}
+            onChangeText={field.onChangeText}
+            secureTextEntry={field.secureTextEntry}
+            keyboardType={field.keyboardType}
+          />
+        </View>
+      ))}
 
       <TouchableOpacity style={styles.button} onPress={handleSignUp}>
         <Text style={styles.buttonText}>Sign Up</Text>
       </TouchableOpacity>
+
+      <Text style={styles.footerText}>Already have an account? <Text style={styles.link}>Log in</Text></Text>
     </View>
   );
 }
@@ -139,39 +79,64 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     padding: 20,
+    backgroundColor: '#F7F8FA',
     justifyContent: 'center',
   },
   header: {
-    fontSize: 30,
+    fontSize: 28,
     fontWeight: 'bold',
     textAlign: 'center',
-    marginBottom: 20,
+    marginBottom: 25,
+    color: '#333',
   },
   inputContainer: {
     flexDirection: 'row',
     alignItems: 'center',
-    borderBottomWidth: 1,
-    borderBottomColor: 'gray',
-    marginBottom: 10,
+    backgroundColor: '#FFF',
+    borderRadius: 12,
+    paddingHorizontal: 15,
+    paddingVertical: 10,
+    marginBottom: 15,
+    shadowColor: "#000",
+    shadowOffset: { width: 0, height: 3 },
+    shadowOpacity: 0.1,
+    shadowRadius: 5,
+    elevation: 3,
   },
   input: {
     flex: 1,
-    height: 50,
-    paddingHorizontal: 10,
+    height: 45,
+    marginLeft: 10,
     fontSize: 16,
-    color: 'black',
+    color: '#333',
   },
   button: {
-    backgroundColor: 'black',
-    padding: 15,
+    backgroundColor: '#1E88E5',
+    paddingVertical: 15,
     alignItems: 'center',
-    borderRadius: 5,
-    marginTop: 20,
+    borderRadius: 12,
+    shadowColor: "#1E88E5",
+    shadowOffset: { width: 0, height: 4 },
+    shadowOpacity: 0.3,
+    shadowRadius: 6,
+    elevation: 3,
+    marginTop: 10,
   },
   buttonText: {
-    color: 'white',
+    color: '#FFF',
+    fontSize: 18,
+    fontWeight: 'bold',
+  },
+  footerText: {
+    textAlign: 'center',
+    fontSize: 16,
+    color: '#555',
+    marginTop: 15,
+  },
+  link: {
+    color: '#1E88E5',
     fontWeight: 'bold',
   },
 });
-export default RegisterScreen;
 
+export default RegisterScreen;
