@@ -1,30 +1,21 @@
-import { StatusBar } from "expo-status-bar";
-import { StyleSheet, Text, View } from "react-native";
-import Trangchu from "./screen/trangchu";
-import { ScrollView } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
+import LoginScreen from "./screen/LoginScreen";
+import RegisterScreen from './screen/RegisterScreen'; 
 import ProfileScreen from "./screen/profileScreen";
+import Trangchu from "./screen/trangchu";
 
 const Stack = createStackNavigator();
+
 export default function App() {
   return (
     <NavigationContainer>
-      <Stack.Navigator initialRouteName="Profile">
-        <Stack.Screen
-          name="Profile"
-          component={ProfileScreen}
-          options={{ headerShown: false }}
-        />
+      <Stack.Navigator initialRouteName="Login" screenOptions={{ headerShown: false }}>
+        <Stack.Screen name="Login" component={LoginScreen} />
+        <Stack.Screen name="RegisterScreen" component={RegisterScreen} />
+        <Stack.Screen name="Profile" component={ProfileScreen} />
+        <Stack.Screen name="Trangchu" component={Trangchu} />
       </Stack.Navigator>
     </NavigationContainer>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flexGrow: 1,
-    backgroundColor: "#fff",
-    justifyContent: "center",
-  },
-});
