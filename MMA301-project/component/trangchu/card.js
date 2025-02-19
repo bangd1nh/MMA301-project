@@ -49,7 +49,7 @@ const styles = StyleSheet.create({
         objectFit: "cover",
     },
     card: {
-        margin: 10,
+        margin: "2%",
         padding: 10,
         elevation: 1,
         width: "45%",
