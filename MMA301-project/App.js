@@ -1,9 +1,12 @@
 
+
 import { StatusBar } from "expo-status-bar";
 import { StyleSheet, Text, View } from "react-native";
 import Trangchu from "./screen/trangchu";
 import { ScrollView } from "react-native";
 import { createStackNavigator } from "@react-navigation/stack";
+import LoginScreen from "./screen/LoginScreen";
+import RegisterScreen from './screen/RegisterScreen'; 
 import ProfileScreen from "./screen/profileScreen";
 import { createDrawerNavigator } from "@react-navigation/drawer";
 import {
@@ -54,3 +57,4 @@ const styles = StyleSheet.create({
     },
 
 });
+
