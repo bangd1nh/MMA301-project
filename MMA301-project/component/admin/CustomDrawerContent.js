@@ -10,7 +10,7 @@ export default function CustomDrawerContent(props) {
         <Avatar
           rounded
           size="medium"
-          source={{ uri: 'https://via.placeholder.com/100' }}
+          source={{ uri: 'https://tse1.mm.bing.net/th?id=OIP.V0NH3fa-mZ4AJ94SEQTy_wHaHa&pid=Api&P=0&h=220' }}
         />
         <View style={styles.userInfo}>
           <Text style={styles.userName}>Admin</Text>
