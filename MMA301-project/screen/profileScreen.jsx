@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   View,
   Text,
@@ -14,9 +14,10 @@ import { getUserById } from "../data/userData";
 const userProfile = getUserById(1);
 
 const ProfileScreen = () => {
+  const [profile, setProfile] = useState(userProfile);
   const navigation = useNavigation();
 
-  if (!userProfile) {
+  if (!profile) {
     return (
       <View style={styles.container}>
         <Text style={styles.errorText}>User data is missing!</Text>
@@ -39,28 +40,32 @@ const ProfileScreen = () => {
           </TouchableOpacity>
         </View>
         <View style={styles.botHeader}>
-          <Image
-            source={{ uri: userProfile.avatarUrl }}
-            style={styles.avatar}
-          />
-          <Text style={styles.name}>{userProfile.name}</Text>
-          <Text style={styles.title}>{userProfile.title}</Text>
+          <Image source={{ uri: profile.avatarUrl }} style={styles.avatar} />
+          <Text style={styles.name}>{profile.name}</Text>
+          <TouchableOpacity
+            style={styles.editProfile}
+            onPress={() =>
+              navigation.navigate("EditProfile", {
+                userProfile: profile,
+                setUserProfile: setProfile,
+              })
+            }
+          >
+            <Text style={styles.textEdit}>Edit Profile</Text>
+            <Ionicons name={"pencil-outline"} size={20} color="#333" />
+          </TouchableOpacity>
         </View>
       </View>
 
       <View style={styles.infoContainer}>
-        <InfoItem icon="mail" label="Email" value={userProfile.email} />
-        <InfoItem icon="call" label="Mobile" value={userProfile.phone} />
-        <InfoItem
-          icon="logo-twitter"
-          label="Twitter"
-          value={userProfile.twitter}
-        />
-        <InfoItem icon="location" label="Address" value={userProfile.address} />
+        <InfoItem icon="mail" label="Email" value={profile.email} />
+        <InfoItem icon="call" label="Mobile" value={profile.phone} />
+        <InfoItem icon="logo-twitter" label="Twitter" value={profile.twitter} />
+        <InfoItem icon="location" label="Address" value={profile.address} />
         <InfoItem
           icon="logo-facebook"
           label="Facebook"
-          value={userProfile.facebook}
+          value={profile.facebook}
         />
       </View>
     </ScrollView>
@@ -84,8 +89,8 @@ const styles = StyleSheet.create({
     backgroundColor: "#007AFF",
     padding: 20,
     alignItems: "center",
-    width: "100&",
-    height: "470",
+    width: "100%",
+    height: 470,
   },
   topHeader: {
     flexDirection: "row",
@@ -100,14 +105,18 @@ const styles = StyleSheet.create({
   profileText: { color: "#fff", fontSize: 25, fontWeight: "bold" },
   avatar: { width: 250, height: 250, borderRadius: 400, marginBottom: 10 },
   name: { fontSize: 25, fontWeight: "bold", color: "#fff" },
-  title: { fontSize: 20, color: "#fff" },
   infoContainer: { padding: 20, flex: 1 },
+  editProfile: {
+    flexDirection: "row",
+    alignItems: "center",
+  },
+  textEdit: { fontSize: 20 },
   infoItem: {
     flexDirection: "row",
     alignItems: "center",
     marginBottom: 15,
     flex: 1,
-    width: "100% ",
+    width: "100%",
     paddingBottom: 30,
   },
   infoIcon: { marginRight: 10, fontSize: 35 },
