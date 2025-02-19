@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import {
     Image,
+    Pressable,
     ScrollView,
     StyleSheet,
     Text,
@@ -14,72 +15,19 @@ import Swiper from "react-native-swiper";
 import { shoes } from "../constant/data";
 import Card from "../component/trangchu/card";
 import Footer from "../component/trangchu/footer";
-import { createDrawerNavigator } from "@react-navigation/drawer";
+import { createDrawerNavigator, DrawerItem } from "@react-navigation/drawer";
+import Navbar from "../component/trangchu/navbar";
+import { useNavigation } from "@react-navigation/native";
 
-function Trangchu() {
-    const [toogleSearch, setToggleSearch] = useState(false);
+const Trangchu = () => {
+    const navigate = useNavigation();
+    const handlePress = (shoes) => {
+        navigate.navigate("Detail", { s: shoes });
+    };
     return (
         <ScrollView contentContainerStyle={styles.container}>
             {/* search box */}
-            <View
-                style={{
-                    position: "absolute",
-                    width: 200,
-                    zIndex: 1,
-                    backgroundColor: "white",
-                    transform: [{ translateX: "31%" }, { translateY: 53 }],
-                    flexDirection: "row",
-                    display: `${toogleSearch ? "flex" : "none"}`,
-                }}
-            >
-                <TextInput
-                    style={styles.textinput}
-                    placeholder="search here"
-                ></TextInput>
-                {/* <AntDesign
-                    name="search1"
-                    size={40}
-                    style={{ alignItems: "flex-end" }}
-                /> */}
-            </View>
-
-            <View style={styles.somethingtop}>
-                <Text style={{ color: "white" }}>Hotline: 0947199561</Text>
-                <View style={{ flexDirection: "row", gap: 20 }}>
-                    <TouchableOpacity>
-                        <Text style={{ color: "white" }}>Đăng nhập</Text>
-                    </TouchableOpacity>
-                    <TouchableOpacity>
-                        <Text style={{ color: "white" }}>Đăng ký</Text>
-                    </TouchableOpacity>
-                </View>
-            </View>
-            <View style={styles.navbar}>
-                <TouchableOpacity>
-                    <Entypo name="menu" size={40}></Entypo>
-                </TouchableOpacity>
-                <Image
-                    source={require("../assets/logo.jpg")}
-                    style={{
-                        height: 100,
-                        width: 100,
-                        marginLeft: 40,
-                        display: `${toogleSearch ? "none" : "flex"}`,
-                    }}
-                />
-                <View style={{ flexDirection: "row", gap: 20 }}>
-                    <TouchableOpacity
-                        onPress={() => {
-                            setToggleSearch(!toogleSearch);
-                        }}
-                    >
-                        <AntDesign name="search1" size={30}></AntDesign>
-                    </TouchableOpacity>
-                    <TouchableOpacity>
-                        <AntDesign name="shoppingcart" size={30}></AntDesign>
-                    </TouchableOpacity>
-                </View>
-            </View>
+            <Navbar></Navbar>
             <View style={styles.slide}>
                 <Swiper showsButtons={true} style={styles.swiper}>
                     {shoes.map((book, index) => {
@@ -103,7 +51,13 @@ function Trangchu() {
                     {shoes.map((book, index) => {
                         return (
                             <View key={index} style={{ flexDirection: "row" }}>
-                                <View style={{ flexDirection: "column" }}>
+                                <Pressable
+                                    onPress={() => {
+                                        console.log(book);
+                                        handlePress(book);
+                                    }}
+                                    style={{ flexDirection: "column" }}
+                                >
                                     <Image
                                         source={book.image}
                                         style={styles.bookslidesmall}
@@ -111,7 +65,7 @@ function Trangchu() {
                                     <Text style={styles.price}>
                                         {book.price}$
                                     </Text>
-                                </View>
+                                </Pressable>
                                 {index + 1 < shoes.length && (
                                     <View style={{ flexDirection: "column" }}>
                                         <Image
@@ -152,38 +106,16 @@ function Trangchu() {
             <Footer></Footer>
         </ScrollView>
     );
-}
+};
 
 const styles = StyleSheet.create({
     container: {
-        flex: 1,
+        flexGrow: 1,
         height: "auto",
         justifyContent: "space-between",
         marginTop: 50,
         flexDirection: "column",
-    },
-    navbar: {
-        minHeight: 100,
-        width: "100%",
-        flexDirection: "row",
-        justifyContent: "space-between",
-        alignItems: "center",
-        flexShrink: 1,
-        paddingHorizontal: 10,
-    },
-    logo: {
-        height: 100,
-        width: 100,
-        marginLeft: 40,
-    },
-    somethingtop: {
-        maxHeight: 30,
-        flexShrink: 1,
-        backgroundColor: "#707070",
-        justifyContent: "space-between",
-        flexDirection: "row",
-        paddingHorizontal: 20,
-        alignItems: "center",
+        backgroundColor: "white",
     },
     bookslide: {
         height: 300,
@@ -230,7 +162,7 @@ const styles = StyleSheet.create({
     },
     textinput: {
         borderWidth: 2,
-        width: 250,
+        width: "130%",
         height: 35,
         fontSize: 15,
         paddingHorizontal: 20,
