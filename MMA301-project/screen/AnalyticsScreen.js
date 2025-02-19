@@ -34,6 +34,7 @@ const COLORS = ["#8884d8", "#82ca9d", "#ffc658", "#ff7f50", "#00c49f"];
 
 const AnalyticsScreen = () => {
   return (
+    
     <ScrollView style={styles.container}>
       <Text style={styles.title}>📊 Revenue Analytics</Text>
       <View style={styles.chartContainer}>
@@ -79,5 +80,6 @@ const styles = StyleSheet.create({
   title: { fontSize: 20, fontWeight: "bold", textAlign: "center", marginVertical: 15 },
   chartContainer: { alignItems: "center", marginBottom: 20 },
 });
+
 
 export default AnalyticsScreen;
