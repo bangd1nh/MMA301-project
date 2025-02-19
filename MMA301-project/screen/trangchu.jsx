@@ -9,7 +9,7 @@ import {
     Touchable,
     TouchableOpacity,
     View,
-    Modal
+    Modal,
 } from "react-native";
 import { AntDesign, Entypo } from "@expo/vector-icons";
 import Swiper from "react-native-swiper";
@@ -19,8 +19,7 @@ import Footer from "../component/trangchu/footer";
 import { createDrawerNavigator, DrawerItem } from "@react-navigation/drawer";
 import Navbar from "../component/trangchu/navbar";
 import { useNavigation } from "@react-navigation/native";
-import { useCart } from "../context/CartContext";  // Quản lý giỏ hàng
-
+import { useCart } from "../context/CartContext"; // Quản lý giỏ hàng
 
 const Trangchu = () => {
     const navigate = useNavigation();
@@ -36,12 +35,12 @@ const Trangchu = () => {
         addToCart(product);
         setAddedProduct(product);
         setModalVisible(true);
-    }; 
+    };
 
     const handleCheckout = () => {
         setModalVisible(false);
         navigate.navigate("CartFlow", { screen: "Checkout" });
-      };
+    };
 
     return (
         <ScrollView contentContainerStyle={styles.container}>
@@ -72,7 +71,6 @@ const Trangchu = () => {
                             <View key={index} style={{ flexDirection: "row" }}>
                                 <Pressable
                                     onPress={() => {
-                                        console.log(book);
                                         handlePress(book);
                                     }}
                                     style={{ flexDirection: "column" }}
@@ -126,40 +124,52 @@ const Trangchu = () => {
             </View>
             <Footer></Footer>
             {/* Modal thông báo "Mua hàng thành công" */}
-            <Modal animationType="slide" transparent={true} visible={modalVisible}>
+            <Modal
+                animationType="slide"
+                transparent={true}
+                visible={modalVisible}
+            >
                 <View style={modalStyles.modalContainer}>
-                <View style={modalStyles.modalContent}>
-                    <Text style={modalStyles.modalHeader}>✅ Thêm vào giỏ hàng thành công</Text>
-                    {addedProduct && (
-                    <View style={modalStyles.modalItem}>
-                        <Image
-                        source={ addedProduct.image }
-                        style={modalStyles.modalImage}
-                        />
-                        <View>
-                        <Text style={modalStyles.modalName}>{addedProduct.name}</Text>
-                        <Text style={modalStyles.modalPrice}>
-                            {addedProduct.price.toLocaleString()}đ
+                    <View style={modalStyles.modalContent}>
+                        <Text style={modalStyles.modalHeader}>
+                            ✅ Thêm vào giỏ hàng thành công
                         </Text>
-                        </View>
+                        {addedProduct && (
+                            <View style={modalStyles.modalItem}>
+                                <Image
+                                    source={addedProduct.image}
+                                    style={modalStyles.modalImage}
+                                />
+                                <View>
+                                    <Text style={modalStyles.modalName}>
+                                        {addedProduct.name}
+                                    </Text>
+                                    <Text style={modalStyles.modalPrice}>
+                                        {addedProduct.price.toLocaleString()}đ
+                                    </Text>
+                                </View>
+                            </View>
+                        )}
+                        <Text style={modalStyles.cartInfo}>
+                            Giỏ hàng của bạn hiện có {getTotalItems()} sản phẩm
+                        </Text>
+                        <TouchableOpacity
+                            style={modalStyles.continueButton}
+                            onPress={() => setModalVisible(false)}
+                        >
+                            <Text style={modalStyles.continueText}>
+                                Tiếp tục mua hàng
+                            </Text>
+                        </TouchableOpacity>
+                        <TouchableOpacity
+                            style={modalStyles.checkoutButton}
+                            onPress={handleCheckout}
+                        >
+                            <Text style={modalStyles.checkoutText}>
+                                Thanh toán ngay
+                            </Text>
+                        </TouchableOpacity>
                     </View>
-                    )}
-                    <Text style={modalStyles.cartInfo}>
-                    Giỏ hàng của bạn hiện có {getTotalItems()} sản phẩm
-                    </Text>
-                    <TouchableOpacity
-                    style={modalStyles.continueButton}
-                    onPress={() => setModalVisible(false)}
-                    >
-                    <Text style={modalStyles.continueText}>Tiếp tục mua hàng</Text>
-                    </TouchableOpacity>
-                    <TouchableOpacity
-                    style={modalStyles.checkoutButton}
-                    onPress={handleCheckout}
-                    >
-                    <Text style={modalStyles.checkoutText}>Thanh toán ngay</Text>
-                    </TouchableOpacity>
-                </View>
                 </View>
             </Modal>
         </ScrollView>
@@ -230,74 +240,73 @@ const styles = StyleSheet.create({
 
 const modalStyles = StyleSheet.create({
     modalContainer: {
-      flex: 1,
-      justifyContent: "center",
-      alignItems: "center",
-      backgroundColor: "rgba(0, 0, 0, 0.5)",
+        flex: 1,
+        justifyContent: "center",
+        alignItems: "center",
+        backgroundColor: "rgba(0, 0, 0, 0.5)",
     },
     modalContent: {
-      width: "80%",
-      backgroundColor: "#fff",
-      padding: 15,
-      borderRadius: 10,
-      alignItems: "center",
+        width: "80%",
+        backgroundColor: "#fff",
+        padding: 15,
+        borderRadius: 10,
+        alignItems: "center",
     },
     modalHeader: {
-      fontSize: 18,
-      fontWeight: "bold",
-      color: "#28a745",
-      marginBottom: 10,
+        fontSize: 18,
+        fontWeight: "bold",
+        color: "#28a745",
+        marginBottom: 10,
     },
     modalItem: {
-      flexDirection: "row",
-      alignItems: "center",
-      marginVertical: 10,
-      backgroundColor: "#f8f8f8",
-      padding: 10,
-      borderRadius: 5,
-      width: "100%",
+        flexDirection: "row",
+        alignItems: "center",
+        marginVertical: 10,
+        backgroundColor: "#f8f8f8",
+        padding: 10,
+        borderRadius: 5,
+        width: "100%",
     },
     modalImage: {
-      width: 50,
-      height: 50,
-      marginRight: 10,
+        width: 50,
+        height: 50,
+        marginRight: 10,
     },
     modalName: {
-      fontSize: 16,
-      fontWeight: "bold",
+        fontSize: 16,
+        fontWeight: "bold",
     },
     modalPrice: {
-      fontSize: 14,
-      color: "#555",
+        fontSize: 14,
+        color: "#555",
     },
     cartInfo: {
-      marginVertical: 10,
-      fontSize: 14,
+        marginVertical: 10,
+        fontSize: 14,
     },
     continueButton: {
-      backgroundColor: "#007bff",
-      padding: 10,
-      borderRadius: 5,
-      width: "100%",
-      alignItems: "center",
-      marginBottom: 10,
+        backgroundColor: "#007bff",
+        padding: 10,
+        borderRadius: 5,
+        width: "100%",
+        alignItems: "center",
+        marginBottom: 10,
     },
     continueText: {
-      color: "#fff",
-      fontWeight: "bold",
+        color: "#fff",
+        fontWeight: "bold",
     },
     checkoutButton: {
-      backgroundColor: "black",
-      padding: 10,
-      borderRadius: 5,
-      width: "100%",
-      alignItems: "center",
+        backgroundColor: "black",
+        padding: 10,
+        borderRadius: 5,
+        width: "100%",
+        alignItems: "center",
     },
     checkoutText: {
-      color: "#fff",
-      fontWeight: "bold",
+        color: "#fff",
+        fontWeight: "bold",
     },
-  });
-
+});
 
 export default Trangchu;
