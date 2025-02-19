@@ -9,10 +9,13 @@ import {
 import React, { useState } from "react";
 import { Entypo, AntDesign } from "@expo/vector-icons";
 import { DrawerActions, useNavigation } from "@react-navigation/native";
+import { useCart } from "../../context/CartContext";
 
 const Navbar = () => {
     const [toogleSearch, setToggleSearch] = useState(false);
     const navigation = useNavigation();
+    const { getTotalItems } = useCart();
+
     return (
         <View>
             <View
@@ -73,8 +76,21 @@ const Navbar = () => {
                     >
                         <AntDesign name="search1" size={30}></AntDesign>
                     </TouchableOpacity>
-                    <TouchableOpacity>
-                        <AntDesign name="shoppingcart" size={30}></AntDesign>
+                    <TouchableOpacity
+                        style={styles.cartContainer}
+                        onPress={() =>
+                            navigation.navigate("CartFlow", { screen: "Cart" })
+                        }
+                    >
+                        <Image
+                        source={require("../../assets/shopping-bag.png")}
+                        style={styles.cartIcon}
+                        />
+                        {getTotalItems() > 0 && (
+                        <View style={styles.badge}>
+                            <Text style={styles.badgeText}>{getTotalItems()}</Text>
+                        </View>
+                        )}
                     </TouchableOpacity>
                 </View>
             </View>
@@ -114,6 +130,33 @@ const styles = StyleSheet.create({
         paddingHorizontal: 20,
         borderRadius: 20,
     },
+    cartContainer: {
+        backgroundColor: "#E2E6E8",
+        padding: 10,
+        borderRadius: 30,
+        position: "relative",
+      },
+      cartIcon: {
+        width: 24,
+        height: 24,
+        resizeMode: "contain",
+      },
+      badge: {
+        position: "absolute",
+        top: -5,
+        right: -5,
+        backgroundColor: "black",
+        width: 20,
+        height: 20,
+        borderRadius: 10,
+        justifyContent: "center",
+        alignItems: "center",
+      },
+      badgeText: {
+        color: "#fff",
+        fontSize: 12,
+        fontWeight: "bold",
+      },
 });
 
 export default Navbar;

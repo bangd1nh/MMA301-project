@@ -40,17 +40,17 @@ const CheckoutScreen = () => {
       if (form.paymentMethod === "cod") {
         Alert.alert("Bạn đã chọn thanh toán trực tiếp", "Đặt hàng thành công.", [{ text: "OK", onPress: () => {
           clearCart();
-          navigation.navigate("Home");
+          navigation.navigate("Trangchu");
         }}]);
       } else if (form.paymentMethod === "online") {
         Alert.alert("Bạn đã chọn hình thức thanh toán online", "Vui lòng thực hiện thanh toán qua cổng thanh toán.", [{ text: "OK", onPress: () => {
           clearCart();
-          navigation.navigate("Home");
+          navigation.navigate("Trangchu");
         }}]);
       } else {
         Alert.alert("Thành công", "Đơn hàng đã được xác nhận!", [{ text: "OK", onPress: () => {
           clearCart();
-          navigation.navigate("Home");
+          navigation.navigate("Trangchu");
         }}]);
       }
     }
@@ -59,7 +59,7 @@ const CheckoutScreen = () => {
   return (
     <ScrollView style={styles.container} contentContainerStyle={{ paddingBottom: 80 }}>
       <View style={styles.header}>
-        <TouchableOpacity onPress={() => navigation.navigate("Home")}>
+        <TouchableOpacity onPress={() => navigation.navigate("Trangchu")}>
           <Text style={styles.backButton}>🏠 Trang chủ</Text>
         </TouchableOpacity>
       </View>
@@ -77,7 +77,7 @@ const CheckoutScreen = () => {
           renderItem={({ item }) => (
             <View style={styles.cartItem}>
               <View style={styles.imageContainer}>
-                <Image source={{ uri: item.image }} style={styles.productImage} />
+                <Image source={item.image} style={styles.productImage} />
                 <View style={styles.quantityBadge}>
                   <Text style={styles.quantityText}>{item.quantity}</Text>
                 </View>

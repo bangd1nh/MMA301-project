@@ -68,6 +68,8 @@ import OrderManagement from "./screen/OrderManagement";
 import CustomDrawerContent from "./component/admin/CustomDrawerContent";
 import ProfileScreen from "./screen/profileScreen";
 import Detail from "./screen/detail";
+import AppNavigator from "./navigation/AppNavigator";
+import { CartProvider } from "./context/CartContext";
 
 const Drawer = createDrawerNavigator();
 const Stack = createStackNavigator();
@@ -103,6 +105,7 @@ const HomePage = () => {
                 options={{ headerShown: false }}
             />
             <Drawer.Screen
+
                 name="Detail"
                 component={AdminStack}
                 options={{ headerShown: false }}
@@ -145,19 +148,26 @@ function AdminStack() {
 
 export default function App() {
     return (
-        <NavigationContainer linking={linking}>
-            <Stack.Navigator initialRouteName="Trangchu">
-                <Stack.Screen
-                    name="Trangchu"
-                    component={HomePage}
-                    options={{ headerShown: false }}
-                />
-                <Stack.Screen
-                    name="Admin"
-                    component={AdminStack}
-                    options={{ headerShown: false }}
-                />
-            </Stack.Navigator>
-        </NavigationContainer>
+        <CartProvider>
+            <NavigationContainer linking={linking}>
+                <Stack.Navigator initialRouteName="Trangchu">
+                    <Stack.Screen
+                        name="Trangchu"
+                        component={HomePage}
+                        options={{ headerShown: false }}
+                    />
+                    <Stack.Screen
+                        name="Admin"
+                        component={AdminStack}
+                        options={{ headerShown: false }}
+                    />
+                    <Stack.Screen
+                        name="CartFlow"
+                        component={AppNavigator}
+                        options={{ headerShown: false }}
+                    />
+                </Stack.Navigator>
+            </NavigationContainer>
+        </CartProvider>
     );
 }

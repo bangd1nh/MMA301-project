@@ -10,7 +10,10 @@ const CartScreen = () => {
   const renderItem = ({ item }) => (
     <View style={styles.cartItem}>
       {/* Hình sản phẩm */}
-      <Image source={{ uri: item.image }} style={styles.image} />
+      <Image
+        source={typeof item.image === "string" ? { uri: item.image } : item.image}
+        style={styles.image}
+      />
       
       {/* Thông tin sản phẩm */}
       <View style={styles.details}>
@@ -51,7 +54,7 @@ const CartScreen = () => {
       {/* Header dạng breadcrumb + icon giỏ hàng cùng một hàng */}
       <View style={styles.breadcrumbContainer}>
         <View style={{ flexDirection: "row", alignItems: "center" }}>
-          <TouchableOpacity onPress={() => navigation.navigate("Home")}>
+          <TouchableOpacity onPress={() => navigation.navigate("Trangchu")}>
             <Text style={styles.breadcrumbLink}>Trang chủ</Text>
           </TouchableOpacity>
           <Text style={styles.breadcrumbSeparator}> &gt; </Text>
@@ -78,9 +81,14 @@ const CartScreen = () => {
       {cart.length === 0 ? (
         <Text style={styles.emptyText}>Giỏ hàng trống</Text>
       ) : (
-        <FlatList data={cart} renderItem={renderItem} keyExtractor={(item) => item.id} />
+        <FlatList
+          data={cart}
+          renderItem={renderItem}
+          keyExtractor={(item, index) =>
+            item.id ? item.id.toString() : index.toString()
+          }
+        />
       )}
-
       {/* Footer */}
       {cart.length > 0 && (
         <View style={styles.footer}>
