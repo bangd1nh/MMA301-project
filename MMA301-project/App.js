@@ -65,6 +65,7 @@ import Dashboard from "./screen/Dashboard";
 import CustomerManagement from "./screen/CustomerManagement";
 import ProductManagement from "./screen/ProductManagement";
 import OrderManagement from "./screen/OrderManagement";
+import AnalyticsScreen from "./screen/AnalyticsScreen"; 
 import CustomDrawerContent from "./component/admin/CustomDrawerContent";
 import ProfileScreen from "./screen/profileScreen";
 import Detail from "./screen/detail";
@@ -83,6 +84,7 @@ const linking = {
                     CustomerManagement: "admin/customermanager",
                     ProductManagement: "admin/productmanager",
                     OrderManagement: "admin/ordermanager",
+                    Analytics: "admin/analytics",
                 },
             },
         },
@@ -91,7 +93,6 @@ const linking = {
 
 const HomePage = () => {
     return (
-      
         <Drawer.Navigator initialRouteName="Home">
             <Drawer.Screen
                 name="Home"
@@ -104,7 +105,7 @@ const HomePage = () => {
                 options={{ headerShown: false }}
             />
             <Drawer.Screen
-                name="Detail"
+                name="Admin"
                 component={AdminStack}
                 options={{ headerShown: false }}
             />
@@ -112,43 +113,26 @@ const HomePage = () => {
     );
 };
 
-function AdminStack() {
+const AdminStack = () => {
     return (
-      
         <Drawer.Navigator
             initialRouteName="Dashboard"
             drawerContent={(props) => <CustomDrawerContent {...props} />}
             screenOptions={{ headerShown: true }}
         >
             <Drawer.Screen name="Dashboard" component={Dashboard} />
-            <Drawer.Screen
-                name="CustomerManagement"
-                component={CustomerManagement}
-                options={{ title: "Quản lý khách hàng" }}
-            />
-            <Drawer.Screen
-                name="ProductManagement"
-                component={ProductManagement}
-                options={{ title: "Quản lý sản phẩm" }}
-            />
-            <Drawer.Screen
-                name="OrderManagement"
-                component={OrderManagement}
-                options={{ title: "Quản lý đơn hàng" }}
-            />
-            <Drawer.Screen
-                name="Home page"
-                component={HomePage}
-                options={{ title: "Home page" }}
-            />
+            <Drawer.Screen name="CustomerManagement" component={CustomerManagement} />
+            <Drawer.Screen name="ProductManagement" component={ProductManagement} />
+            <Drawer.Screen name="OrderManagement" component={OrderManagement} />
+            <Drawer.Screen name="AnalyticsScreen" component={AnalyticsScreen} />
         </Drawer.Navigator>
     );
-}
+};
+
 
 export default function App() {
     return (
         <NavigationContainer linking={linking}>
-          <Stack.Screen name="Home" component={Trangchu} />
             <Stack.Navigator initialRouteName="Trangchu">
                 <Stack.Screen
                     name="Trangchu"
