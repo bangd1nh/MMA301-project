@@ -91,6 +91,7 @@ const linking = {
 
 const HomePage = () => {
     return (
+      
         <Drawer.Navigator initialRouteName="Home">
             <Drawer.Screen
                 name="Home"
@@ -113,6 +114,7 @@ const HomePage = () => {
 
 function AdminStack() {
     return (
+      
         <Drawer.Navigator
             initialRouteName="Dashboard"
             drawerContent={(props) => <CustomDrawerContent {...props} />}
@@ -146,6 +148,7 @@ function AdminStack() {
 export default function App() {
     return (
         <NavigationContainer linking={linking}>
+          <Stack.Screen name="Home" component={Trangchu} />
             <Stack.Navigator initialRouteName="Trangchu">
                 <Stack.Screen
                     name="Trangchu"

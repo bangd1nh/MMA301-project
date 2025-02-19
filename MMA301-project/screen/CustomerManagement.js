@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
-import { View, StyleSheet, ScrollView, Text, Dimensions } from "react-native";
+import { View, StyleSheet, ScrollView, Text } from "react-native";
 import { Card, Icon } from "react-native-elements";
-import { Table, Row, Rows } from "react-native-table-component";
 
 export default function CustomerManagement({ navigation }) {
     const [currentTime, setCurrentTime] = useState("");
@@ -10,51 +9,33 @@ export default function CustomerManagement({ navigation }) {
         const interval = setInterval(() => {
             const now = new Date();
             const dayNames = [
-                "Chủ Nhật",
-                "Thứ Hai",
-                "Thứ Ba",
-                "Thứ Tư",
-                "Thứ Năm",
-                "Thứ Sáu",
-                "Thứ Bảy",
+                "Chủ Nhật", "Thứ Hai", "Thứ Ba", "Thứ Tư", "Thứ Năm", "Thứ Sáu", "Thứ Bảy"
             ];
-            const dayName = dayNames[now.getDay()];
-            const date = now.getDate().toString().padStart(2, "0");
-            const month = (now.getMonth() + 1).toString().padStart(2, "0");
-            const year = now.getFullYear();
-            const hours = now.getHours().toString().padStart(2, "0");
-            const minutes = now.getMinutes().toString().padStart(2, "0");
-            const seconds = now.getSeconds().toString().padStart(2, "0");
-            setCurrentTime(
-                `${dayName}, ${date}/${month}/${year} - ${hours}:${minutes}:${seconds}`
-            );
+            const formattedTime = `${dayNames[now.getDay()]}, ${now.getDate().toString().padStart(2, "0")}/${(now.getMonth() + 1).toString().padStart(2, "0")}/${now.getFullYear()} - ${now.getHours().toString().padStart(2, "0")}:${now.getMinutes().toString().padStart(2, "0")}:${now.getSeconds().toString().padStart(2, "0")}`;
+            setCurrentTime(formattedTime);
         }, 1000);
 
         return () => clearInterval(interval);
     }, []);
 
-    React.useLayoutEffect(() => {
-        navigation.setOptions({
-            title: "Quản lý khách hàng",
-            headerLeft: () => (
-                <Icon
-                    name="menu"
-                    size={30}
-                    onPress={() => navigation.toggleDrawer()}
-                    containerStyle={{ marginLeft: 15 }}
-                />
-            ),
-        });
-    }, [navigation]);
+     React.useLayoutEffect(() => {
+       navigation.setOptions({
+         title: "",
+         headerLeft: () => (
+           <Icon name="menu" size={24} onPress={() => navigation.toggleDrawer()} containerStyle={{ marginLeft: 10 }} />
+         ),
+         headerRight: () => (
+           <Icon name="home" size={24} onPress={() => navigation.navigate("Home")} containerStyle={{ marginRight: 10 }} />
+         ),
+       });
+     }, [navigation]);
 
-    const tableHead = ["ID khách hàng", "Tên khách hàng", "Email", "Admin"];
-    const tableData = [
-        ["1", "Kweeen", "john@example.com", "True"],
-        ["2", "Jane Smith", "jane@example.com", "True"],
-        ["3", "Alice Johnson", "alice@example.com", "False"],
-        ["4", "Bob Brown", "bob@example.com", "False"],
-        ["5", "Emma Wilson", "emma@example.com", "False"],
-        // Thêm khách hàng khác tại đây
+    const customers = [
+        { id: "1", name: "Kweeen", email: "john@gmail.com", isAdmin: true },
+        { id: "2", name: "Jane Smith", email: "jane@gmail.com", isAdmin: true },
+        { id: "3", name: "Alice Johnson", email: "alice@gmail.com", isAdmin: false },
+        { id: "4", name: "Bob Brown", email: "bob@gmail.com", isAdmin: false },
+        { id: "5", name: "Emma Wilson", email: "emm@gmail.com", isAdmin: false }
     ];
 
     return (
@@ -65,18 +46,14 @@ export default function CustomerManagement({ navigation }) {
             </View>
             <View style={styles.section}>
                 <Text style={styles.sectionTitle}>Danh sách khách hàng</Text>
-                <View style={styles.tableContainer}>
-                    <Table
-                        borderStyle={{ borderWidth: 1, borderColor: "#c8e1ff" }}
-                    >
-                        <Row
-                            data={tableHead}
-                            style={styles.head}
-                            textStyle={[styles.headText]}
-                        />
-                        <Rows data={tableData} textStyle={[styles.text]} />
-                    </Table>
-                </View>
+                {customers.map((customer) => (
+                    <Card key={customer.id} containerStyle={styles.card}>
+                        <Card.Title>{customer.name}</Card.Title>
+                        <Card.Divider />
+                        <Text style={styles.cardText}><Text style={styles.label}>Email:</Text> {customer.email}</Text>
+                        <Text style={styles.cardText}><Text style={styles.label}>Admin:</Text> {customer.isAdmin ? "Yes" : "No"}</Text>
+                    </Card>
+                ))}
             </View>
         </ScrollView>
     );
@@ -85,13 +62,13 @@ export default function CustomerManagement({ navigation }) {
 const styles = StyleSheet.create({
     container: {
         padding: 16,
-        backgroundColor: "#f0f0f0", // Màu nền xám
+        backgroundColor: "#f0f0f0",
     },
     header: {
         flexDirection: "row",
         justifyContent: "space-between",
         alignItems: "center",
-        backgroundColor: "#fff", // Màu nền trắng cho phần tiêu đề
+        backgroundColor: "#fff",
         padding: 10,
         borderRadius: 10,
         shadowColor: "#000",
@@ -101,16 +78,16 @@ const styles = StyleSheet.create({
         marginBottom: 20,
     },
     title: {
-        fontSize: 28,
+        fontSize: 16,
         fontWeight: "bold",
         color: "#333",
     },
     time: {
-        fontSize: 16,
+        fontSize: 10,
         color: "#666",
     },
     section: {
-        backgroundColor: "#fff", // Màu nền trắng cho phần bảng
+        backgroundColor: "#fff",
         padding: 10,
         borderRadius: 10,
         shadowColor: "#000",
@@ -120,32 +97,25 @@ const styles = StyleSheet.create({
         marginBottom: 20,
     },
     sectionTitle: {
-        fontSize: 24,
+        fontSize: 20,
         marginBottom: 10,
         fontWeight: "bold",
         color: "#444",
         textAlign: "center",
     },
-    tableContainer: {
-        marginTop: 20,
+    card: {
         borderRadius: 10,
-        overflow: "hidden",
+        shadowColor: "#000",
+        shadowOffset: { width: 0, height: 2 },
+        shadowOpacity: 0.1,
+        shadowRadius: 5,
+        marginBottom: 10,
     },
-    head: {
-        height: 50,
-        backgroundColor: "#f1f8ff",
-    },
-    headText: {
-        margin: 6,
-        textAlign: "center",
+    cardText: {
         fontSize: 14,
         color: "#333",
+    },
+    label: {
         fontWeight: "bold",
-    },
-    text: {
-        margin: 6,
-        textAlign: "center",
-        fontSize: 14,
-        color: "#333",
-    },
+    }
 });
