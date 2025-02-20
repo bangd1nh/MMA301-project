@@ -1,7 +1,5 @@
-import React, { useLayoutEffect } from "react";
+import React from "react";
 import { View, Text, StyleSheet, ScrollView } from "react-native";
-import { useNavigation } from "@react-navigation/native";
-import { Icon } from "react-native-elements";
 import {
   BarChart,
   Bar,
@@ -35,21 +33,8 @@ const bookSalesData = [
 const COLORS = ["#8884d8", "#82ca9d", "#ffc658", "#ff7f50", "#00c49f"];
 
 const AnalyticsScreen = () => {
-  const navigation = useNavigation();
-
-  useLayoutEffect(() => {
-    navigation.setOptions({
-      title: "",
-      headerLeft: () => (
-        <Icon name="menu" size={24} onPress={() => navigation.toggleDrawer()} containerStyle={{ marginLeft: 10 }} />
-      ),
-      headerRight: () => (
-        <Icon name="home" size={24} onPress={() => navigation.navigate("Home")} containerStyle={{ marginRight: 10 }} />
-      ),
-    });
-  }, [navigation]);
-
   return (
+    
     <ScrollView style={styles.container}>
       <Text style={styles.title}>📊 Revenue Analytics</Text>
       <View style={styles.chartContainer}>
@@ -95,5 +80,6 @@ const styles = StyleSheet.create({
   title: { fontSize: 20, fontWeight: "bold", textAlign: "center", marginVertical: 15 },
   chartContainer: { alignItems: "center", marginBottom: 20 },
 });
+
 
 export default AnalyticsScreen;

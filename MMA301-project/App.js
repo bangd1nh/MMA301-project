@@ -8,6 +8,7 @@ import Dashboard from "./screen/Dashboard";
 import CustomerManagement from "./screen/CustomerManagement";
 import ProductManagement from "./screen/ProductManagement";
 import OrderManagement from "./screen/OrderManagement";
+import AnalyticsScreen from "./screen/AnalyticsScreen";
 import CustomDrawerContent from "./component/admin/CustomDrawerContent";
 import ProfileScreen from "./screen/profileScreen";
 import Detail from "./screen/detail";
@@ -28,6 +29,7 @@ const linking = {
                     CustomerManagement: "admin/customermanager",
                     ProductManagement: "admin/productmanager",
                     OrderManagement: "admin/ordermanager",
+                    Analytics: "admin/analytics",
                 },
             },
         },
@@ -61,7 +63,7 @@ const HomePage = () => {
     );
 };
 
-function AdminStack() {
+const AdminStack = () => {
     return (
         <Drawer.Navigator
             initialRouteName="Dashboard"
@@ -72,26 +74,16 @@ function AdminStack() {
             <Drawer.Screen
                 name="CustomerManagement"
                 component={CustomerManagement}
-                options={{ title: "Quản lý khách hàng" }}
             />
             <Drawer.Screen
                 name="ProductManagement"
                 component={ProductManagement}
-                options={{ title: "Quản lý sản phẩm" }}
             />
-            <Drawer.Screen
-                name="OrderManagement"
-                component={OrderManagement}
-                options={{ title: "Quản lý đơn hàng" }}
-            />
-            <Drawer.Screen
-                name="Home page"
-                component={HomePage}
-                options={{ title: "Home page" }}
-            />
+            <Drawer.Screen name="OrderManagement" component={OrderManagement} />
+            <Drawer.Screen name="AnalyticsScreen" component={AnalyticsScreen} />
         </Drawer.Navigator>
     );
-}
+};
 
 export default function App() {
     return (
