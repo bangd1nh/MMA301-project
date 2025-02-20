@@ -23,7 +23,7 @@ export default function Dashboard({ navigation }) {
         <Icon name="menu" size={24} onPress={() => navigation.toggleDrawer()} containerStyle={{ marginLeft: 10 }} />
       ),
       headerRight: () => (
-        <Icon name="home" size={24} onPress={() => navigation.navigate("Home")} containerStyle={{ marginRight: 10 }} />
+        <Icon name="home" size={24} onPress={() => navigation.navigate("Trangchu")} containerStyle={{ marginRight: 10 }} />
       ),
     });
   }, [navigation]);
@@ -36,8 +36,8 @@ export default function Dashboard({ navigation }) {
   ];
 
   const orders = [
-    { id: "25", customer: "Minh", phone: "0796510005", address: "Hoa Hai", date: "18/03/2004", total: "7,036k", status: "COD" },
-    { id: "26", customer: "Thanh", phone: "0796123456", address: "Hai Chau", date: "19/03/2004", total: "5,200k", status: "Paid" },
+    { id: "25", customer: "Minh", phone: "0796510005", address: "Hoa Hai", date: "18/03/2004", total: "7,036,000", status: "COD" },
+    { id: "26", customer: "Thanh", phone: "0796123456", address: "Hai Chau", date: "19/03/2004", total: "5,200,000", status: "Paid" },
   ];
 
   const getStatusColor = (status) => {

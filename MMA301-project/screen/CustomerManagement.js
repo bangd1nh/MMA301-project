@@ -25,7 +25,7 @@ export default function CustomerManagement({ navigation }) {
            <Icon name="menu" size={24} onPress={() => navigation.toggleDrawer()} containerStyle={{ marginLeft: 10 }} />
          ),
          headerRight: () => (
-           <Icon name="home" size={24} onPress={() => navigation.navigate("Home")} containerStyle={{ marginRight: 10 }} />
+           <Icon name="Trangchu" size={24} onPress={() => navigation.navigate("Home")} containerStyle={{ marginRight: 10 }} />
          ),
        });
      }, [navigation]);
