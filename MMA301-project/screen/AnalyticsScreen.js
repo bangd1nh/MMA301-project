@@ -24,7 +24,7 @@ const revenueData = [
 
 const bookSalesData = [
   { name: "Fiction", value: 400 },
-  { name: "Non-Fiction", value: 300 },
+  { name: "Horror", value: 300 },
   { name: "Science", value: 200 },
   { name: "History", value: 150 },
   { name: "Technology", value: 350 },
