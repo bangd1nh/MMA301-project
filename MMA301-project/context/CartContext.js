@@ -6,7 +6,7 @@ export const CartProvider = ({ children }) => {
   const [cart, setCart] = useState([]);
 
   const clearCart = () => {
-    setCart([]); // Đảm bảo giỏ hàng được xóa
+    setCart([]);
   };
 
 

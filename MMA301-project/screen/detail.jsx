@@ -34,7 +34,6 @@ const Detail = () => {
             <View style={styles.slide}>
                 <Swiper style={styles.swiper} index={choice} key={choice}>
                     {s.imgList.map((shoes, index) => {
-                        console.log(shoes);
                         return (
                             <View key={index}>
                                 <Image
@@ -71,7 +70,6 @@ const Detail = () => {
                                         <Pressable
                                             onPress={() => {
                                                 setChoice(index + 1);
-                                                console.log(index + 1);
                                             }}
                                             style={{ flexDirection: "column" }}
                                         >
@@ -85,7 +83,6 @@ const Detail = () => {
                                         <Pressable
                                             onPress={() => {
                                                 setChoice(index + 2);
-                                                console.log(index + 2);
                                             }}
                                             style={{ flexDirection: "column" }}
                                         >

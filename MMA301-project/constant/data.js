@@ -1,5 +1,6 @@
 export const shoes = [
     {
+        id: "1",
         image: require("../assets/jordan1.jpg"),
         name: "Jordan 1",
         brand: "Nike",
@@ -16,6 +17,7 @@ export const shoes = [
         ],
     },
     {
+        id: "2",
         tag: "HOT",
         image: require("../assets/airmax90.png"),
         name: "Air Max 90",
@@ -27,6 +29,7 @@ export const shoes = [
             "The Air Max 90, known for its comfort and style, is a must-have for sneaker enthusiasts.",
     },
     {
+        id: "3",
         image: require("../assets/ultraboost.webp"),
         name: "Ultra Boost",
         brand: "Adidas",
@@ -37,6 +40,7 @@ export const shoes = [
             "The Ultra Boost offers unparalleled comfort and performance, perfect for running and casual wear.",
     },
     {
+        id: "4",
         tag: "NEW",
         image: require("../assets/converse.webp"),
         name: "Converse Chuck Taylor",
@@ -48,6 +52,7 @@ export const shoes = [
             "The Converse Chuck Taylor, a timeless sneaker that has been a staple in fashion for decades.",
     },
     {
+        id: "5",
         image: require("../assets/vans.webp"),
         name: "Vans Old Skool",
         brand: "Vans",
