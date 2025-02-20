@@ -1,7 +1,7 @@
-import React from 'react';
-import { DrawerContentScrollView, DrawerItem } from '@react-navigation/drawer';
-import { View, Text, StyleSheet } from 'react-native';
-import { Avatar, Icon } from 'react-native-elements';
+import React from "react";
+import { DrawerContentScrollView, DrawerItem } from "@react-navigation/drawer";
+import { View, Text, StyleSheet } from "react-native";
+import { Avatar, Icon } from "react-native-elements";
 
 export default function CustomDrawerContent(props) {
   return (
@@ -10,7 +10,9 @@ export default function CustomDrawerContent(props) {
         <Avatar
           rounded
           size="medium"
-          source={{ uri: 'https://via.placeholder.com/100' }}
+          source={{
+            uri: "https://tse1.mm.bing.net/th?id=OIP.V0NH3fa-mZ4AJ94SEQTy_wHaHa&pid=Api&P=0&h=220",
+          }}
         />
         <View style={styles.userInfo}>
           <Text style={styles.userName}>Admin</Text>
@@ -19,42 +21,40 @@ export default function CustomDrawerContent(props) {
       </View>
       <DrawerItem
         label="Bảng điều khiển"
-        icon={({ color, size }) => (
-          <Icon name="dashboard" color={color} size={size} />
-        )}
-        onPress={() => props.navigation.navigate('Dashboard')}
+        icon={({ color, size }) => <Icon name="dashboard" color={color} size={size} />}
+        onPress={() => props.navigation.navigate("Dashboard")}
       />
       <DrawerItem
         label="Quản lý khách hàng"
-        icon={({ color, size }) => (
-          <Icon name="users" type="feather" color={color} size={size} />
-        )}
-        onPress={() => props.navigation.navigate('CustomerManagement')}
+        icon={({ color, size }) => <Icon name="users" type="feather" color={color} size={size} />}
+        onPress={() => props.navigation.navigate("CustomerManagement")}
       />
       <DrawerItem
         label="Quản lý sản phẩm"
-        icon={({ color, size }) => (
-          <Icon name="box" type="feather" color={color} size={size} />
-        )}
-        onPress={() => props.navigation.navigate('ProductManagement')}
+        icon={({ color, size }) => <Icon name="box" type="feather" color={color} size={size} />}
+        onPress={() => props.navigation.navigate("ProductManagement")}
       />
       <DrawerItem
         label="Quản lý đơn hàng"
-        icon={({ color, size }) => (
-          <Icon name="shopping-cart" type="feather" color={color} size={size} />
-        )}
-        onPress={() => props.navigation.navigate('OrderManagement')}
+        icon={({ color, size }) => <Icon name="shopping-cart" type="feather" color={color} size={size} />}
+        onPress={() => props.navigation.navigate("OrderManagement")}
       />
+      <DrawerItem
+        label="Thống kê"
+        icon={({ color, size }) => <Icon name="bar-chart" type="feather" color={color} size={size} />}
+        onPress={() => props.navigation.navigate("AnalyticsScreen")}
+      />
+
     </DrawerContentScrollView>
   );
 }
 
 const styles = StyleSheet.create({
   header: {
-    flexDirection: 'row',
-    alignItems: 'center',
+    flexDirection: "row",
+    alignItems: "center",
     padding: 16,
-    backgroundColor: '#ededed',
+    backgroundColor: "#ededed",
     marginBottom: 10,
   },
   userInfo: {
@@ -62,10 +62,10 @@ const styles = StyleSheet.create({
   },
   userName: {
     fontSize: 18,
-    fontWeight: 'bold',
+    fontWeight: "bold",
   },
   userGreeting: {
     fontSize: 14,
-    color: '#666',
+    color: "#666",
   },
 });
