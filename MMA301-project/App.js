@@ -14,6 +14,7 @@ import ProfileScreen from "./screen/profileScreen";
 import Detail from "./screen/detail";
 import AppNavigator from "./navigation/AppNavigator";
 import { CartProvider } from "./context/CartContext";
+import FeedBack from "./screen/FeedBack";
 
 const Drawer = createDrawerNavigator();
 const Stack = createStackNavigator();
@@ -57,6 +58,11 @@ const HomePage = () => {
             <Drawer.Screen
                 name="Admin"
                 component={AdminStack}
+                options={{ headerShown: false }}
+            />
+            <Drawer.Screen
+                name="Feed Back"
+                component={FeedBack}
                 options={{ headerShown: false }}
             />
         </Drawer.Navigator>
