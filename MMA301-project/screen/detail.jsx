@@ -15,6 +15,7 @@ import { Link, useRoute } from "@react-navigation/native";
 import Swiper from "react-native-swiper";
 import { shoes } from "../constant/data";
 import { Picker } from "@react-native-picker/picker";
+import Footer from "../component/trangchu/footer";
 
 const Detail = () => {
     const [choice, setChoice] = useState(0);
@@ -155,6 +156,7 @@ const Detail = () => {
                     <Text>Add to cart</Text>
                 </TouchableOpacity>
             </View>
+            <Footer></Footer>
         </ScrollView>
     );
 };
