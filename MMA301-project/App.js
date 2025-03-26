@@ -15,6 +15,11 @@ import Detail from "./screen/detail";
 import AppNavigator from "./navigation/AppNavigator";
 import { CartProvider } from "./context/CartContext";
 import FeedBack from "./screen/FeedBack";
+import LoginScreen from "./screen/LoginScreen";
+import RegisterScreen from "./screen/RegisterScreen";
+import EditProfile from "./screen/EditProfile";
+import CheckoutScreen from "./screen/CheckoutScreen";
+import PaymentScreen from "./screen/PaymentScreen";
 
 const Drawer = createDrawerNavigator();
 const Stack = createStackNavigator();
@@ -111,6 +116,21 @@ export default function App() {
                         component={AppNavigator}
                         options={{ headerShown: false }}
                     />
+                    <Stack.Screen
+                        name="Login"
+                        component={LoginScreen}
+                        options={{ headerShown: false }}
+                    />
+                    <Stack.Screen
+                        name="Register"
+                        component={RegisterScreen}
+                        options={{ headerShown: false }}
+                    />
+                    {/* <Stack.Screen
+                        name="Payment"
+                        component={PaymentScreen}
+                        options={{ headerShown: false }}
+                    /> */}
                 </Stack.Navigator>
             </NavigationContainer>
         </CartProvider>

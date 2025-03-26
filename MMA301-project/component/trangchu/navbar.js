@@ -43,10 +43,18 @@ const Navbar = () => {
             <View style={styles.somethingtop}>
                 <Text style={{ color: "white" }}>Hotline: 0947199561</Text>
                 <View style={{ flexDirection: "row", gap: 20 }}>
-                    <TouchableOpacity>
+                    <TouchableOpacity
+                        onPress={() => {
+                            navigation.navigate("Login");
+                        }}
+                    >
                         <Text style={{ color: "white" }}>Đăng nhập</Text>
                     </TouchableOpacity>
-                    <TouchableOpacity>
+                    <TouchableOpacity
+                        onPress={() => {
+                            navigation.navigate("register");
+                        }}
+                    >
                         <Text style={{ color: "white" }}>Đăng ký</Text>
                     </TouchableOpacity>
                 </View>
@@ -83,13 +91,15 @@ const Navbar = () => {
                         }
                     >
                         <Image
-                        source={require("../../assets/shopping-bag.png")}
-                        style={styles.cartIcon}
+                            source={require("../../assets/shopping-bag.png")}
+                            style={styles.cartIcon}
                         />
                         {getTotalItems() > 0 && (
-                        <View style={styles.badge}>
-                            <Text style={styles.badgeText}>{getTotalItems()}</Text>
-                        </View>
+                            <View style={styles.badge}>
+                                <Text style={styles.badgeText}>
+                                    {getTotalItems()}
+                                </Text>
+                            </View>
                         )}
                     </TouchableOpacity>
                 </View>
@@ -135,13 +145,13 @@ const styles = StyleSheet.create({
         padding: 10,
         borderRadius: 30,
         position: "relative",
-      },
-      cartIcon: {
+    },
+    cartIcon: {
         width: 24,
         height: 24,
         resizeMode: "contain",
-      },
-      badge: {
+    },
+    badge: {
         position: "absolute",
         top: -5,
         right: -5,
@@ -151,12 +161,12 @@ const styles = StyleSheet.create({
         borderRadius: 10,
         justifyContent: "center",
         alignItems: "center",
-      },
-      badgeText: {
+    },
+    badgeText: {
         color: "#fff",
         fontSize: 12,
         fontWeight: "bold",
-      },
+    },
 });
 
 export default Navbar;
