@@ -4,18 +4,27 @@ const CartContext = createContext();
 
 export const CartProvider = ({ children }) => {
   const [cart, setCart] = useState([]);
-
+  const [orderHistory, setOrderHistory] = useState([]);
   const clearCart = () => {
     setCart([]);
   };
 
+  const addOrder = (order) => {
+    setOrderHistory((prevHistory) => [
+      ...prevHistory,
+      { ...order, id: Date.now(), date: new Date() }, // Thêm ID và ngày đặt hàng
+    ]);
+    clearCart(); // Xóa giỏ hàng sau khi đặt
+  };
 
   const addToCart = (product) => {
     setCart((prevCart) => {
       const existingItem = prevCart.find((item) => item.id === product.id);
       if (existingItem) {
         return prevCart.map((item) =>
-          item.id === product.id ? { ...item, quantity: item.quantity + 1 } : item
+          item.id === product.id
+            ? { ...item, quantity: item.quantity + 1 }
+            : item
         );
       } else {
         return [...prevCart, { ...product, quantity: 1 }];
@@ -30,7 +39,9 @@ export const CartProvider = ({ children }) => {
   const updateQuantity = (productId, quantity) => {
     setCart((prevCart) =>
       prevCart.map((item) =>
-        item.id === productId ? { ...item, quantity: Math.max(1, quantity) } : item
+        item.id === productId
+          ? { ...item, quantity: Math.max(1, quantity) }
+          : item
       )
     );
   };
@@ -41,7 +52,18 @@ export const CartProvider = ({ children }) => {
   };
 
   return (
-    <CartContext.Provider value={{ cart, addToCart, removeFromCart, updateQuantity, getTotalItems, clearCart }}>
+    <CartContext.Provider
+      value={{
+        cart,
+        addToCart,
+        removeFromCart,
+        updateQuantity,
+        getTotalItems,
+        clearCart,
+        orderHistory,
+        addOrder,
+      }}
+    >
       {children}
     </CartContext.Provider>
   );
