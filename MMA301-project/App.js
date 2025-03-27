@@ -20,119 +20,124 @@ import RegisterScreen from "./screen/RegisterScreen";
 import EditProfile from "./screen/EditProfile";
 import CheckoutScreen from "./screen/CheckoutScreen";
 import PaymentScreen from "./screen/PaymentScreen";
+import OrderHistoryScreen from "./screen/OrderHistoryScreen";
 
 const Drawer = createDrawerNavigator();
 const Stack = createStackNavigator();
 
 const linking = {
-    prefixes: [Linking.createURL("/")],
-    config: {
+  prefixes: [Linking.createURL("/")],
+  config: {
+    screens: {
+      Trangchu: "",
+      Admin: {
         screens: {
-            Trangchu: "",
-            Admin: {
-                screens: {
-                    Dashboard: "admin",
-                    CustomerManagement: "admin/customermanager",
-                    ProductManagement: "admin/productmanager",
-                    OrderManagement: "admin/ordermanager",
-                    Analytics: "admin/analytics",
-                },
-            },
+          Dashboard: "admin",
+          CustomerManagement: "admin/customermanager",
+          ProductManagement: "admin/productmanager",
+          OrderManagement: "admin/ordermanager",
+          Analytics: "admin/analytics",
         },
+      },
     },
+  },
 };
 
 const HomePage = () => {
-    return (
-        <Drawer.Navigator initialRouteName="Home">
-            <Drawer.Screen
-                name="Home"
-                component={Trangchu}
-                options={{ headerShown: false }}
-            />
-            <Drawer.Screen
-                name="Profile"
-                component={ProfileScreen}
-                options={{ headerShown: false }}
-            />
-            <Drawer.Screen
-                name="Detail"
-                component={Detail}
-                options={{ headerShown: false }}
-            />
-            <Drawer.Screen
-                name="Admin"
-                component={AdminStack}
-                options={{ headerShown: false }}
-            />
-            <Drawer.Screen
-                name="Feed Back"
-                component={FeedBack}
-                options={{ headerShown: false }}
-            />
-        </Drawer.Navigator>
-    );
+  return (
+    <Drawer.Navigator initialRouteName="Home">
+      <Drawer.Screen
+        name="Home"
+        component={Trangchu}
+        options={{ headerShown: false }}
+      />
+      <Drawer.Screen
+        name="Profile"
+        component={ProfileScreen}
+        options={{ headerShown: false }}
+      />
+      <Drawer.Screen
+        name="Detail"
+        component={Detail}
+        options={{ headerShown: false }}
+      />
+      <Drawer.Screen
+        name="Admin"
+        component={AdminStack}
+        options={{ headerShown: false }}
+      />
+      <Drawer.Screen
+        name="Feed Back"
+        component={FeedBack}
+        options={{ headerShown: false }}
+      />
+      <Drawer.Screen
+        name="Order History"
+        component={OrderHistoryScreen}
+        options={{ headerShown: false }}
+      />
+    </Drawer.Navigator>
+  );
 };
 
 const AdminStack = () => {
-    return (
-        <Drawer.Navigator
-            initialRouteName="Dashboard"
-            drawerContent={(props) => <CustomDrawerContent {...props} />}
-            screenOptions={{ headerShown: true }}
-        >
-            <Drawer.Screen name="Dashboard" component={Dashboard} />
-            <Drawer.Screen
-                name="CustomerManagement"
-                component={CustomerManagement}
-            />
-            <Drawer.Screen
-                name="ProductManagement"
-                component={ProductManagement}
-            />
-            <Drawer.Screen name="OrderManagement" component={OrderManagement} />
-            <Drawer.Screen name="AnalyticsScreen" component={AnalyticsScreen} />
-        </Drawer.Navigator>
-    );
+  return (
+    <Drawer.Navigator
+      initialRouteName="Dashboard"
+      drawerContent={(props) => <CustomDrawerContent {...props} />}
+      screenOptions={{ headerShown: true }}
+    >
+      <Drawer.Screen name="Dashboard" component={Dashboard} />
+      <Drawer.Screen name="CustomerManagement" component={CustomerManagement} />
+      <Drawer.Screen name="ProductManagement" component={ProductManagement} />
+      <Drawer.Screen name="OrderManagement" component={OrderManagement} />
+      <Drawer.Screen name="AnalyticsScreen" component={AnalyticsScreen} />
+    </Drawer.Navigator>
+  );
 };
 
 export default function App() {
-    return (
-        <CartProvider>
-            <NavigationContainer linking={linking}>
-                <Stack.Navigator initialRouteName="Trangchu">
-                    <Stack.Screen
-                        name="Trangchu"
-                        component={HomePage}
-                        options={{ headerShown: false }}
-                    />
-                    <Stack.Screen
-                        name="Admin"
-                        component={AdminStack}
-                        options={{ headerShown: false }}
-                    />
-                    <Stack.Screen
-                        name="CartFlow"
-                        component={AppNavigator}
-                        options={{ headerShown: false }}
-                    />
-                    <Stack.Screen
-                        name="Login"
-                        component={LoginScreen}
-                        options={{ headerShown: false }}
-                    />
-                    <Stack.Screen
-                        name="Register"
-                        component={RegisterScreen}
-                        options={{ headerShown: false }}
-                    />
-                    {/* <Stack.Screen
+  return (
+    <CartProvider>
+      <NavigationContainer linking={linking}>
+        <Stack.Navigator initialRouteName="Trangchu">
+          <Stack.Screen
+            name="Trangchu"
+            component={HomePage}
+            options={{ headerShown: false }}
+          />
+          <Stack.Screen
+            name="Admin"
+            component={AdminStack}
+            options={{ headerShown: false }}
+          />
+          <Stack.Screen
+            name="CartFlow"
+            component={AppNavigator}
+            options={{ headerShown: false }}
+          />
+          <Stack.Screen
+            name="Login"
+            component={LoginScreen}
+            options={{ headerShown: false }}
+          />
+          <Stack.Screen
+            name="Register"
+            component={RegisterScreen}
+            options={{ headerShown: false }}
+          />
+          {/* <Stack.Screen
                         name="Payment"
                         component={PaymentScreen}
                         options={{ headerShown: false }}
                     /> */}
-                </Stack.Navigator>
-            </NavigationContainer>
-        </CartProvider>
-    );
+        </Stack.Navigator>
+        <Stack.Screen
+          name="OrderHistory"
+          component={OrderHistoryScreen}
+          options={{ headerShown: false }}
+        />
+      </NavigationContainer>
+    </CartProvider>
+  );
 }
